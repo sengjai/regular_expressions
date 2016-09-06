@@ -1,5 +1,13 @@
+#require "byebug"
+
 # Determine whether a string contains a Social Security number.
 def has_ssn?(string)
+	#byebug
+	if /\d{3}\-\d{2}\-\d{4}/.match(string) 
+		return true
+	else
+		return false
+	end
 end
 
 puts "has_ssn? returns true if it has what looks like a SSN"
@@ -11,6 +19,7 @@ puts has_ssn?("please confirm your identity: XXX-XX-1422") == false
 
 # Return the Social Security number from a string.
 def grab_ssn(string)
+	return /\d{3}\-\d{2}\-\d{4}/.match(string).to_s 
 end
 
 
@@ -23,6 +32,14 @@ puts grab_ssn("please confirm your identity: XXX-XX-1422") == nil
 
 # Return all of the Social Security numbers from a string.
 def grab_all_ssns(string)
+	arr = []
+
+	#if /\d{3}\-\d{2}\-\d{4}/.match(string)
+	#	arr << /\d{3}\-\d{2}\-\d{4}/.match(string).to_s
+	#end
+	#p arr
+
+	return string.scan(/\d{3}\-\d{2}\-\d{4}/)
 end
 
 puts "grab_all_ssns returns all SSNs if the string has any SSNs"
@@ -34,6 +51,10 @@ puts grab_all_ssns("please confirm your identity: XXX-XX-1422") == []
 
 # Obfuscate all of the Social Security numbers in a string. Example: XXX-XX-4430.
 def hide_all_ssns(string)
+
+	arr = []
+	string 
+	arr = string.gsub!(/\d{3}\-\d{2}/,"XXX-XX")
 end
 
 puts "hide_all_ssns obfuscates any SSNs in the string"
